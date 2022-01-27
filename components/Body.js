@@ -2,10 +2,11 @@ import Search from "./Search";
 import {useEffect, useState} from "react";
 import {useSession} from "next-auth/react";
 import Poster from "./Poster";
+import Track from "./Track";
 
 const Body = ({spotifyApi,chooseTrack}) => {
     const {data:session} = useSession();
-    const {accessToken} = session;
+    const accessToken = session?.accessToken;
     const [search,setSearch] = useState("")
     const [searchResults,setSearchResults] = useState([])
     const [newReleases,setNewReleases] = useState([])
@@ -95,6 +96,33 @@ const Body = ({spotifyApi,chooseTrack}) => {
                     <button className="text-[#CECECE] bg-[#1A1A1A] text-[13px] py-3.5 px-4 rounded-2xl w-full font-bold bg-opacity-80 hover:bg-opacity-100 transition ease-out">
                         All Genres
                     </button>
+                </div>
+            {/*    Tracks*/}
+                <div>
+                    <h2 className="text-white font-bold">
+                        {searchResults.length === 0 ? "New Releases" : "Tracks"}
+                    </h2>
+                    <div className="space-y-3 border-2 border-[#262626] rounded-2xl p-3 bg-[#0D0D0D] overflow-y-scroll h-[1000px] md:h-96 scrollbar-thin scrollbar-thumb-gray-600 scrollbar-thumb-rounded hover:scrollbar-thumb-gray-500 w-[830px]">
+                        {searchResults.length === 0
+                            ? newReleases
+                                .slice(4, newReleases.length)
+                                .map((track) => (
+                                    <Track
+                                        key={track.id}
+                                        track={track}
+                                        chooseTrack={chooseTrack}
+                                    />
+                                ))
+                            : searchResults
+                                .slice(4, searchResults.length)
+                                .map((track) => (
+                                    <Track
+                                        key={track.id}
+                                        track={track}
+                                        chooseTrack={chooseTrack}
+                                    />
+                                ))}
+                    </div>
                 </div>
             </div>
         </section>
