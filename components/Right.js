@@ -15,7 +15,7 @@ const Right = () => {
                 <BiBell className="text-[#ccc] text-xl " />
              </div>
             {/*profile*/}
-
+             <Dropdown />
             </div>
         </section>
     );
