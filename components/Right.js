@@ -15,32 +15,19 @@ const Right = ({spotifyApi,chooseTrack}) => {
     // Recently Played Tracks...
     useEffect(() => {
         if (!accessToken) return;
-        // spotifyApi.getMyRecentlyPlayedTracks({ limit: 20 }).then((res) => {
-        //     setRecentlyPlayed(
-        //         res.body.items.map(({ track }) => {
-        //             return {
-        //                 id: track.id,
-        //                 artist: track.artists[0].name,
-        //                 title: track.name,
-        //                 uri: track.uri,
-        //                 albumUrl: track.album.images[0].url,
-        //             };
-        //         })
-        //     );
-        // });
-
-        spotifyApi.getNewReleases().then((res) => {
-            setRecentlyPlayed(res.body.albums.items.map((track) => {
-                return {
-                    id:track.id,
-                    artist:track.artists[0].name,
-                    title:track.name,
-                    uri:track.uri,
-                    albumUrl:track.images[0].url,
-                }
-            }))
-
-        })
+        spotifyApi.getMyRecentlyPlayedTracks({ limit: 20 }).then((res) => {
+            setRecentlyPlayed(
+                res.body.items.map(({ track }) => {
+                    return {
+                        id: track.id,
+                        artist: track.artists[0].name,
+                        title: track.name,
+                        uri: track.uri,
+                        albumUrl: track.album.images[0].url,
+                    };
+                })
+            );
+        });
 
     }, [accessToken]);
 
