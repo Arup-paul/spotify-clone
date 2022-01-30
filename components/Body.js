@@ -21,6 +21,7 @@ const Body = ({spotifyApi,chooseTrack}) => {
         if(!search) return setSearchResults([])
         if(!accessToken) return ;
 
+
         spotifyApi.searchTracks(search).then((res) => {
             setSearchResults(res.body.tracks.items.map((track) => {
                 return {
@@ -93,7 +94,7 @@ const Body = ({spotifyApi,chooseTrack}) => {
                         <div className="genre">Country</div>
                         <div className="genre">Techno</div>
                     </div>
-                    <button className="text-[#CECECE] bg-[#1A1A1A] text-[13px] py-3.5 px-4 rounded-2xl w-full font-bold bg-opacity-80 hover:bg-opacity-100 transition ease-out">
+                    <button className="btn">
                         All Genres
                     </button>
                 </div>
